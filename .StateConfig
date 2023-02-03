@@ -1,0 +1,26 @@
+{
+"Program": "Code.exe",
+"StateList": ["InitState", "OneState", "TwoState", "ThreeState"],
+
+"InitState": {
+	"StateImagePath": "",
+	"ActionImagePath": "",
+	"Action": "click"
+},
+
+"OneState": {
+	"StateImagePath": "D:/work/learn/ahk/image/test.png",
+	"ActionImagePath": "D:/work/learn/ahk/image/test.png",
+	"Action": ["left"]
+},
+
+"TwoState": {
+	"StateImagePath": "D:/work/learn/ahk/image/test.png",
+	"Action": ["a"]
+},
+
+"ThreeState": {
+	"StateImagePath": "",
+	"Action": ["left"]
+}
+}

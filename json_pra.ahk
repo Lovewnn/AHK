@@ -7,7 +7,7 @@
 str := FileRead("D:/work/learn/ahk/.StateConfig")
 Jobj := Jxon_load(&str)
 
-MsgBox Jobj["StateDir"]
+MsgBox Jobj["Program"]
 StateList := Jobj["StateList"] ; abc
 
 
@@ -23,12 +23,14 @@ MsgBox WinExist("A")
 
 #s:: {
 	Loop  {
-		if WinExist("ahk_exe" "Code.exe") {
-			MouseMove 0,0
-			for state in StateArry {
-				if FindPose(&x, &y, state.imagePath) {
-					MsgBox "find" state.name
-					state.actionFun(x,y)
+		if WinExist("ahk_exe" Jobj["Program"]) {
+			if WinActive("ahk_exe" Jobj["Program"]) {
+				MouseMove 0,0
+				for state in StateArry {
+					if FindPose(&x, &y, state.stateImagePath) {
+						;MsgBox "find" state.name
+						state.actionFun(100,200)
+					}
 				}
 			}
 			sleep 1000
@@ -41,24 +43,6 @@ MsgBox WinExist("A")
 	return
 }
 
-
-FindPose(&FoundX, &FoundY, Path)
-{
-	try
-		{
-			if !FileExist(Path) {
-				return false
-			}
-			if ImageSearch(&FoundX, &FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, Path)
-				return true
-			else
-				return false
-		}
-		catch as exc
-			MsgBox "Could not conduct the search due to the following error:`n" exc.Message
-
-		return false
-}
 ;
 ; If you set `JSON.BoolsAsInts := false` before calling JSON.Load
 ;MsgBox, % obj[4, 1] == JSON.True ; 1
