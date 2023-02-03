@@ -1,0 +1,1 @@
+StateMap := Map("OneState", 1, "TwoState", 2, "ThreeState", 3,)
