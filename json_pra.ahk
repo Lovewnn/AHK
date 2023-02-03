@@ -22,24 +22,26 @@ MsgBox WinExist("A")
 ;1. 判断当前所处的状态,执行功能函数
 
 #s:: {
-	Loop  {
-		if WinExist("ahk_exe" Jobj["Program"]) {
-			if WinActive("ahk_exe" Jobj["Program"]) {
-				MouseMove 0,0
-				for state in StateArry {
-					if FindPose(&x, &y, state.stateImagePath) {
-						;MsgBox "find" state.name
-						state.actionFun(100,200)
-					}
+	SetTimer func_main, 1000
+}
+
+#q:: {
+	SetTimer func_main, 0
+}
+
+func_main()
+{
+	if WinExist("ahk_exe" Jobj["Program"]) {
+		if WinActive("ahk_exe" Jobj["Program"]) {
+			MouseMove 0,0
+			for state in StateArry {
+				if FindPose(&x, &y, state.stateImagePath) {
+					;MsgBox "find" state.name
+					state.actionFun(100,200)
 				}
 			}
-			sleep 1000
-		} else {
-			MsgBox "please start the window"
-			break
 		}
-	
-	}
+	} 
 	return
 }
 
