@@ -7,7 +7,8 @@
 str := FileRead("D:/work/learn/ahk/.StateConfig")
 Jobj := Jxon_load(&str)
 
-MsgBox Jobj["Program"]
+;MsgBox Jobj["Program"]
+;MsgBox A_Hour
 StateList := Jobj["StateList"] ; abc
 
 
@@ -17,10 +18,7 @@ for name in StateList {
 	;MsgBox state
 	StateArry.Push(MyState(Jobj[name], name))
 }
-
-MsgBox WinExist("A")
 ;1. 判断当前所处的状态,执行功能函数
-
 #s:: {
 	SetTimer func_main, 1000
 }
@@ -29,8 +27,12 @@ MsgBox WinExist("A")
 	SetTimer func_main, 0
 }
 
+
 func_main()
 {
+	if (A_Hour == 20) {
+		return
+	} 
 	if WinExist("ahk_exe" Jobj["Program"]) {
 		if WinActive("ahk_exe" Jobj["Program"]) {
 			MouseMove 0,0
